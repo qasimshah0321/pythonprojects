@@ -1,0 +1,173 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNEsXIzW/okJnJ3+NZwzpkl",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/qasimshah0321/pythonprojects/blob/main/Assignment_6_Student_Report_Card_Generator_Muhammad_Qasim.py\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "xu5SaaR_zAaZ",
+        "outputId": "794594a9-b809-4477-ad82-fe20b00acb83"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "--- Student Report Card Menu ---\n",
+            "1. Add Student\n",
+            "2. Generate Report\n",
+            "3. Exit\n",
+            "Enter your choice: 2\n",
+            "\n",
+            "--- Student Report Card Menu ---\n",
+            "1. Add Student\n",
+            "2. Generate Report\n",
+            "3. Exit\n",
+            "Enter your choice: 1\n",
+            "Enter student name: Asad\n",
+            "Enter roll number: 1\n",
+            "Enter marks for subject 1: 58\n",
+            "Enter marks for subject 2: 68\n",
+            "Enter marks for subject 3: 76\n",
+            "Enter marks for subject 4: 86\n",
+            "Enter marks for subject 5: 88\n",
+            "\n",
+            "--- Student Report Card Menu ---\n",
+            "1. Add Student\n",
+            "2. Generate Report\n",
+            "3. Exit\n",
+            "Enter your choice: 1\n",
+            "Enter student name: Kamran\n",
+            "Enter roll number: 2\n",
+            "Enter marks for subject 1: 78\n",
+            "Enter marks for subject 2: 67\n",
+            "Enter marks for subject 3: 87\n",
+            "Enter marks for subject 4: 84\n",
+            "Enter marks for subject 5: 88\n",
+            "\n",
+            "--- Student Report Card Menu ---\n",
+            "1. Add Student\n",
+            "2. Generate Report\n",
+            "3. Exit\n",
+            "Enter your choice: 2\n",
+            "\n",
+            "📄 Report Card\n",
+            "Student Name: Asad\n",
+            "Roll No: 1\n",
+            "Marks: [58.0, 68.0, 76.0, 86.0, 88.0]\n",
+            "Total: 376.0\n",
+            "Average: 75.20\n",
+            "Grade: C\n",
+            "\n",
+            "📄 Report Card\n",
+            "Student Name: Kamran\n",
+            "Roll No: 2\n",
+            "Marks: [78.0, 67.0, 87.0, 84.0, 88.0]\n",
+            "Total: 404.0\n",
+            "Average: 80.80\n",
+            "Grade: B\n",
+            "\n",
+            "--- Student Report Card Menu ---\n",
+            "1. Add Student\n",
+            "2. Generate Report\n",
+            "3. Exit\n",
+            "Enter your choice: 3\n",
+            "Exiting..\n"
+          ]
+        }
+      ],
+      "source": [
+        "students = {}\n",
+        "\n",
+        "def calculate_grade(average):\n",
+        "    if average >= 90:\n",
+        "        return 'A'\n",
+        "    elif average >= 80:\n",
+        "        return 'B'\n",
+        "    elif average >= 70:\n",
+        "        return 'C'\n",
+        "    elif average >= 60:\n",
+        "        return 'D'\n",
+        "    else:\n",
+        "        return 'F'\n",
+        "\n",
+        "def add_student():\n",
+        "    name = input(\"Enter student name: \").strip()\n",
+        "    roll = input(\"Enter roll number: \").strip()\n",
+        "\n",
+        "    marks = []\n",
+        "    for i in range(1, 6):\n",
+        "        mark = float(input(f\"Enter marks for subject {i}: \"))\n",
+        "        marks.append(mark)\n",
+        "\n",
+        "    students[name] = {\n",
+        "        \"roll\": roll,\n",
+        "        \"marks\": marks\n",
+        "    }\n",
+        "\n",
+        "def generate_report():\n",
+        "    for name, data in students.items():\n",
+        "        roll = data[\"roll\"]\n",
+        "        marks = data[\"marks\"]\n",
+        "        total = sum(marks)\n",
+        "        average = total / len(marks)\n",
+        "        grade = calculate_grade(average)\n",
+        "\n",
+        "        print(\"\\n📄 Report Card\")\n",
+        "        print(f\"Student Name: {name}\")\n",
+        "        print(f\"Roll No: {roll}\")\n",
+        "        print(f\"Marks: {marks}\")\n",
+        "        print(f\"Total: {total}\")\n",
+        "        print(f\"Average: {average:.2f}\")\n",
+        "        print(f\"Grade: {grade}\")\n",
+        "\n",
+        "while True:\n",
+        "    print(\"\\n--- Student Report Card Menu ---\")\n",
+        "    print(\"1. Add Student\")\n",
+        "    print(\"2. Generate Report\")\n",
+        "    print(\"3. Exit\")\n",
+        "\n",
+        "    choice = input(\"Enter your choice: \")\n",
+        "\n",
+        "    if choice == '1':\n",
+        "        add_student()\n",
+        "    elif choice == '2':\n",
+        "        generate_report()\n",
+        "    elif choice == '3':\n",
+        "        print(\"Exiting..\")\n",
+        "        break\n",
+        "    else:\n",
+        "        print(\"Invalid choice. Try again.\")\n"
+      ]
+    }
+  ]
+}
